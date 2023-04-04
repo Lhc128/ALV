@@ -1,0 +1,12 @@
+DROP TABLE Dirige;
+DROP TABLE Possui;
+DROP TABLE Atua_em;
+DROP TABLE Genero;
+DROP TABLE Ator;
+DROP TABLE Diretor;
+DROP TABLE Comenta;
+DROP TABLE Avalia;
+DROP TABLE Usuario;
+DROP TABLE Filme;
+DROP TABLE Assinatura;
+DROP TABLE Cobranca;
