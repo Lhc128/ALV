@@ -1,7 +1,7 @@
-CREATE TABLE USUARIO_Dimensao
+CREATE TABLE USUARIO
 (
+  UsuarioChave uniqueidentifier NOT NULL,
   UsuarioID INT NOT NULL,
-  UsuarioChave INT NOT NULL,
   UsuarioNome VARCHAR(100) NOT NULL,
   Logradouro VARCHAR(255) NOT NULL,
   Bairro VARCHAR(100) NOT NULL,
@@ -10,41 +10,41 @@ CREATE TABLE USUARIO_Dimensao
   PRIMARY KEY (UsuarioChave)
 );
 
-CREATE TABLE FILME_Dimensao
+CREATE TABLE FILME
 (
+  FilmeChave uniqueidentifier NOT NULL,
   FilmeID INT NOT NULL,
-  FilmeChave INT NOT NULL,
   FilmeNome VARCHAR(255) NOT NULL,
-  Duracao INT NOT NULL,
-  ValorRoyalty money NOT NULL,
-  AnoDeLancamento INT NOT NULL,
-  MediaAvaliacao DECIMAL(3,2),
   PRIMARY KEY (FilmeChave)
 );
 
-CREATE TABLE GENERO_Dimensao
+CREATE TABLE GENERO
 (
+  GeneroChave uniqueidentifier NOT NULL,
   GeneroID INT NOT NULL,
-  GeneroChave INT NOT NULL,
   GeneroNome VARCHAR(100) NOT NULL,
   PRIMARY KEY (GeneroChave)
 );
 
-CREATE TABLE CALENDARIO_Dimensao
+CREATE TABLE CALENDARIO
 (
-  CalendarioChave INT NOT NULL,
+  CalendarioChave uniqueidentifier NOT NULL,
   DataCompleta DATETIME NOT NULL,
-  DiaDaSemana INT NOT NULL,
+  DataOrigem VARCHAR(2) NOT NULL,
+  DiaDaSemana VARCHAR(20) NOT NULL,
   DiaDoMes INT NOT NULL,
   Mes INT NOT NULL,
   Trimestre INT NOT NULL,
   Ano INT NOT NULL,
+  Hora INT NOT NULL,
+  Minuto INT NOT NULL,
+  Segundo INT NOT NULL,
   PRIMARY KEY (CalendarioChave)
 );
 
-CREATE TABLE PRODUTORA_Dimensao
+CREATE TABLE PRODUTORA
 (
-  ProdutoraChave INT NOT NULL,
+  ProdutoraChave uniqueidentifier NOT NULL,
   ProdutoraID INT NOT NULL,
   ProdutoraNome VARCHAR(255) NOT NULL,
   PRIMARY KEY (ProdutoraChave)
@@ -53,30 +53,26 @@ CREATE TABLE PRODUTORA_Dimensao
 CREATE TABLE RECEITA
 (
   AssinaturaID INT NOT NULL,
-  ValorPago money NOT NULL,
-  AssinaturaHora DATETIME NOT NULL,
-  CalendarioChave INT NOT NULL,
-  UsuarioChave INT NOT NULL,
-  FilmeChave INT NOT NULL,
+  ValorPago INT NOT NULL,
+  CalendarioChave uniqueidentifier NOT NULL,
+  UsuarioChave uniqueidentifier NOT NULL,
   PRIMARY KEY (AssinaturaID),
-  FOREIGN KEY (CalendarioChave) REFERENCES CALENDARIO_Dimensao(CalendarioChave),
-  FOREIGN KEY (UsuarioChave) REFERENCES USUARIO_Dimensao(UsuarioChave),
-  FOREIGN KEY (FilmeChave) REFERENCES FILME_Dimensao(FilmeChave)
+  FOREIGN KEY (CalendarioChave) REFERENCES CALENDARIO(CalendarioChave),
+  FOREIGN KEY (UsuarioChave) REFERENCES USUARIO(UsuarioChave)
 );
 
 CREATE TABLE AVALIACAO
 (
   AvaliacaoNota INT NOT NULL,
-  AvaliacaoHora DATETIME NOT NULL,
-  CalendarioChave INT NOT NULL,
-  ClienteChave INT NOT NULL,
-  FilmeChave INT NOT NULL,
-  GeneroChave INT NOT NULL,
-  ProdutoraChave INT NOT NULL,
+  CalendarioChave uniqueidentifier NOT NULL,
+  ClienteChave uniqueidentifier NOT NULL,
+  FilmeChave uniqueidentifier NOT NULL,
+  GeneroChave uniqueidentifier NOT NULL,
+  ProdutoraChave uniqueidentifier NOT NULL,
   PRIMARY KEY (CalendarioChave, FilmeChave),
-  FOREIGN KEY (CalendarioChave) REFERENCES CALENDARIO_Dimensao(CalendarioChave),
-  FOREIGN KEY (ClienteChave) REFERENCES USUARIO_Dimensao(UsuarioChave),
-  FOREIGN KEY (FilmeChave) REFERENCES FILME_Dimensao(FilmeChave),
-  FOREIGN KEY (GeneroChave) REFERENCES GENERO_Dimensao(GeneroChave),
-  FOREIGN KEY (ProdutoraChave) REFERENCES PRODUTORA_Dimensao(ProdutoraChave)
+  FOREIGN KEY (CalendarioChave) REFERENCES CALENDARIO(CalendarioChave),
+  FOREIGN KEY (ClienteChave) REFERENCES USUARIO(UsuarioChave),
+  FOREIGN KEY (FilmeChave) REFERENCES FILME(FilmeChave),
+  FOREIGN KEY (GeneroChave) REFERENCES GENERO(GeneroChave),
+  FOREIGN KEY (ProdutoraChave) REFERENCES PRODUTORA(ProdutoraChave)
 );

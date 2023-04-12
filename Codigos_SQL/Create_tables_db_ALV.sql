@@ -15,7 +15,7 @@ CREATE TABLE Usuario
   Senha VARCHAR(255) NOT NULL,
   NumeroDoCartao VARCHAR(16) NOT NULL,
   NomeDoProprietario VARCHAR(100) NOT NULL,
-  DataVencimento DATE NOT NULL,
+  DataVencimento DATETIME NOT NULL,
   CodigoDeSeguranca VARCHAR(4) NOT NULL,
   Bairro VARCHAR(100) NOT NULL,
   Municipio VARCHAR(100) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE Avaliacao
 (
   Comentario TEXT,
   Nota INT,
-  AvaliacaoData DATE NOT NULL,
+  AvaliacaoData DATETIME NOT NULL,
   AvaliacaoID INT NOT NULL,
   UsuarioID INT NOT NULL,
   FilmeID INT NOT NULL,
@@ -86,7 +86,7 @@ CREATE TABLE Cargo
 
 CREATE TABLE Assiste
 (
-  Data DATE NOT NULL,
+  Data DATETIME NOT NULL,
   UsuarioID INT NOT NULL,
   FilmeID INT NOT NULL,
   PRIMARY KEY (UsuarioID, FilmeID, Data),
@@ -133,8 +133,8 @@ CREATE TABLE Produz
 CREATE TABLE Assinatura
 (
   AssinaturaID INT NOT NULL,
-  DataInicio DATE NOT NULL,
-  DataFim DATE NOT NULL,
+  DataInicio DATETIME NOT NULL,
+  DataFim DATETIME NOT NULL,
   Status VARCHAR(20) NOT NULL,
   UsuarioID INT NOT NULL,
   PlanoID INT NOT NULL,
