@@ -1,3 +1,5 @@
+use DBVLT_ALV_CFB
+go
 DROP TABLE IF EXISTS Modera;
 DROP TABLE IF EXISTS GerenciaConteudo;
 DROP TABLE IF EXISTS Funcionario;

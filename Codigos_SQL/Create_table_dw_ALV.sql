@@ -1,3 +1,5 @@
+use DWVLT_ALV_CFB
+go
 CREATE TABLE USUARIO
 (
   UsuarioChave uniqueidentifier NOT NULL,
@@ -56,7 +58,6 @@ CREATE TABLE RECEITA
   ValorPago INT NOT NULL,
   CalendarioChave uniqueidentifier NOT NULL,
   UsuarioChave uniqueidentifier NOT NULL,
-  PRIMARY KEY (AssinaturaID),
   FOREIGN KEY (CalendarioChave) REFERENCES CALENDARIO(CalendarioChave),
   FOREIGN KEY (UsuarioChave) REFERENCES USUARIO(UsuarioChave)
 );
@@ -75,4 +76,12 @@ CREATE TABLE AVALIACAO
   FOREIGN KEY (FilmeChave) REFERENCES FILME(FilmeChave),
   FOREIGN KEY (GeneroChave) REFERENCES GENERO(GeneroChave),
   FOREIGN KEY (ProdutoraChave) REFERENCES PRODUTORA(ProdutoraChave)
+);
+
+CREATE TABLE CHURN
+(
+	CalendarioChave uniqueidentifier NOT NULL,
+	UsuarioChave uniqueidentifier NOT NULL,
+	FOREIGN KEY(CalendarioChave) REFERENCES Calendario(CalendarioChave),
+	FOREIGN KEY(UsuarioChave) REFERENCES Usuario(UsuarioChave),
 );
