@@ -77,7 +77,7 @@ select
 from
 	Avaliacao av;
 
-INSERT INTO [DWVLT_ALV_CFB].[dbo].[RECEITA] 
+INSERT INTO [DWVLT_ALV_CFB].[dbo].[RECEITA] (CalendarioChave, UsuarioChave, AssinaturaID, ValorPago)
 select
 	c.CalendarioChave,
 	u.UsuarioChave,
@@ -90,9 +90,8 @@ from
 	on a.DataInicio = c.DataCompleta
 	inner join Plano p
 	on a.PlanoID = p.PlanoID;
-	
 
-INSERT INTO [DWVLT_ALV_CFB].[dbo].[AVALIACAO] 
+INSERT INTO [DWVLT_ALV_CFB].[dbo].[AVALIACAO] (ClienteChave, GeneroChave, ProdutoraChave, CalendarioChave, FilmeChave, AvaliacaoNota)
 select 
 	u.UsuarioChave,
 	g.GeneroChave,
@@ -116,11 +115,11 @@ from
 	inner join [DWVLT_ALV_CFB].[dbo].[GENERO] g
 	on g.GeneroNome = po.GeneroNome
 
-INSERT INTO [DWVLT_ALV_CFB].[dbo].[CHURN]
+INSERT INTO [DWVLT_ALV_CFB].[dbo].[CHURN] (UsuarioChave, CalendarioChave, Status)
 select
 	u.UsuarioChave,
 	c.CalendarioChave,
-	a.DataFim
+	a.Status
 from
 	Assinatura a inner join [DWVLT_ALV_CFB].[dbo].[USUARIO] u 
 	on a.UsuarioID = u.UsuarioID
@@ -146,7 +145,7 @@ SELECT
 	c.Hora,
 	c.Minuto,
 	c.Segundo,
-	ch.
+	ch.Status
 
 FROM 
 	Avaliacao a INNER JOIN  CALENDARIO c
