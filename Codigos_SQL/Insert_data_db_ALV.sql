@@ -1,3 +1,6 @@
+use DBVLT_ALV_CFB
+go
+
 INSERT INTO Plano (PlanoID, PrecoMensal, PlanoNome) VALUES
 (1, 29.90, 'Plano Básico'),
 (2, 39.90, 'Plano Intermediário'),

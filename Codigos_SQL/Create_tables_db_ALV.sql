@@ -1,3 +1,6 @@
+use DBVLT_ALV_CFB
+go
+
 CREATE TABLE Plano
 (
   PlanoID INT NOT NULL,

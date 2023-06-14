@@ -4,7 +4,6 @@ go
 -- Inserir dados em Produtora
 INSERT INTO [DWVLT_ALV_CFB].[dbo].[PRODUTORA]
 select 
-	newid(),
 	p.ProdutoraID,
     p.ProdutoraNome
 from
@@ -13,16 +12,14 @@ from
 -- Inserir dados em Genero
 INSERT INTO [DWVLT_ALV_CFB].[dbo].[GENERO]
 select 
-	newid(),
 	g.GeneroID,
     g.GeneroNome
 from
-	Genero g;
+	Genero g
 
 -- Inserir dados em Filme
 INSERT INTO [DWVLT_ALV_CFB].[dbo].[FILME]
 select 
-	newid(),
 	f.FilmeID,
     f.FilmeNome
 from
@@ -31,21 +28,18 @@ from
 -- Inserir dados em Usuario
 INSERT INTO [DWVLT_ALV_CFB].[dbo].[USUARIO]
 select 
-	newid(),
 	u.UsuarioID,
     u.UsuarioNome,
     u.Logradouro,
     u.Bairro,
     u.Municipio,
     u.Estado
-
 from
 	Usuario u;
 
 -- Inserir dados em Calendario
 INSERT INTO [DWVLT_ALV_CFB].[dbo].[CALENDARIO]
 select 
-    newid(),
     a.DataInicio,
 	'AS',
 	DATEPART(WEEKDAY, a.DataInicio),
@@ -61,7 +55,6 @@ from
 
 INSERT INTO [DWVLT_ALV_CFB].[dbo].[CALENDARIO]
 select 
-    newid(),
     av.AvaliacaoData,
     'AV',
 	DATEPART(WEEKDAY, av.AvaliacaoData),
@@ -75,16 +68,42 @@ select
 from
 	Avaliacao av;
 
-INSERT INTO[DWVLT_ALV_CFB].[dbo].[RECEITA]
+INSERT INTO [DWVLT_ALV_CFB].[dbo].[RECEITA]
 select
 	c.CalendarioChave,
 	u.UsuarioChave,
 	a.AssinaturaID,
-	p.PlanoMensal
+	p.PrecoMensal
 from
-	[DWVLT_ALV_CFB].[dbo].[CALENDARIO] c,
-	[DWVLT_ALV_CFB].[dbo].[USUARIO] u,
-	Assinatura a,
-	Plano p
-
+	Assinatura a inner join [DWVLT_ALV_CFB].[dbo].[USUARIO] u 
+	on a.UsuarioID = u.UsuarioID
+	inner join	[DWVLT_ALV_CFB].[dbo].[CALENDARIO] c
+	on a.DataInicio = c.DataCompleta
+	inner join Plano p
+	on a.PlanoID = p.PlanoID;
 	
+
+INSERT INTO [DWVLT_ALV_CFB].[dbo].[AVALIACAO]
+select 
+	u.UsuarioChave,
+	g.GeneroChave,
+	p.ProdutoraChave,
+	c.CalendarioChave,
+	f.FilmeChave,
+	a.AvaliacaoNota
+from
+		Avaliacao a 
+	inner join [DWVLT_ALV_CFB].[dbo].[USUARIO] u
+		on a.UsuarioID = u.UsuarioID
+	inner join [DWVLT_ALV_CFB].[dbo].[FILME] f
+		on f.FilmeID = a.FilmeID
+	inner join Produz pr 
+		on f.FilmeID = pr.FilmeID
+	inner join Produtora p
+		on pr.ProdutoraID = p.ProdutoraID 
+	inner join [DWVLT_ALV_CFB].[dbo].[CALENDARIO] c 
+		on a.AvaliacaoData = c.DataCompleta
+	inner join Possui po
+		on po.FilmeID = f.FilmeID
+	inner join Genero g
+		on g.GeneroNome = po.GeneroNome

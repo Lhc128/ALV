@@ -25,6 +25,7 @@ CREATE TABLE GENERO
   GeneroChave uniqueidentifier NOT NULL,
   GeneroID INT NOT NULL,
   GeneroNome VARCHAR(100) NOT NULL,
+  AvaliacaoMedia FLOAT,
   PRIMARY KEY (GeneroChave)
 );
 
