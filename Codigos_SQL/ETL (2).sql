@@ -5,7 +5,7 @@ DECLARE @myguid uniqueidentifier
 SET @myguid = NEWID()
 
 -- Inserir dados em Produtora
-INSERT INTO [DWVLT_ALV_CFB].[dbo].[PRODUTORA] 
+INSERT INTO [DWVLT_ALV_CFB].[dbo].[PRODUTORA] (ProdutoraChave, ProdutoraID, ProdutoraNome)
 select 
 	newid(),
 	p.ProdutoraID,
@@ -14,7 +14,7 @@ from
 	Produtora p;
 
 -- Inserir dados em Genero
-INSERT INTO [DWVLT_ALV_CFB].[dbo].[GENERO] 
+INSERT INTO [DWVLT_ALV_CFB].[dbo].[GENERO] (GeneroChave, GeneroID, GeneroNome)
 select 
 	newid(),
 	g.GeneroID,
@@ -23,7 +23,7 @@ from
 	Genero g;
 
 -- Inserir dados em Filme
-INSERT INTO [DWVLT_ALV_CFB].[dbo].[FILME] 
+INSERT INTO [DWVLT_ALV_CFB].[dbo].[FILME] (FilmeChave, FilmeID, FilmeNome)
 select 
 	newid(),
 	f.FilmeID,
@@ -32,7 +32,7 @@ from
 	Filme f;
 
 -- Inserir dados em Usuario
-INSERT INTO [DWVLT_ALV_CFB].[dbo].[USUARIO] 
+INSERT INTO [DWVLT_ALV_CFB].[dbo].[USUARIO] (UsuarioChave, UsuarioID, UsuarioNome, Logradouro, Bairro, Municipio, Estado)
 select 
 	newid(),
 	u.UsuarioID,
@@ -45,7 +45,7 @@ from
 	Usuario u;
 
 -- Inserir dados em Calendario
-INSERT INTO [DWVLT_ALV_CFB].[dbo].[CALENDARIO]
+INSERT INTO [DWVLT_ALV_CFB].[dbo].[CALENDARIO] (CalendarioChave, DataCompleta, DataOrigem, DiaDaSemana, DiaDoMes, Mes, Trimestre, Ano, Hora, Minuto, Segundo)
 select 
 	newid(),
     a.DataInicio,
@@ -61,7 +61,7 @@ select
 from
 	Assinatura a;
 
-INSERT INTO [DWVLT_ALV_CFB].[dbo].[CALENDARIO] 
+INSERT INTO [DWVLT_ALV_CFB].[dbo].[CALENDARIO] (CalendarioChave, DataCompleta, DataOrigem, DiaDaSemana, DiaDoMes, Mes, Trimestre, Ano, Hora, Minuto, Segundo)
 select 
 	newid(),
     av.AvaliacaoData,
@@ -119,7 +119,8 @@ from
 INSERT INTO [DWVLT_ALV_CFB].[dbo].[CHURN]
 select
 	u.UsuarioChave,
-	c.CalendarioChave
+	c.CalendarioChave,
+	a.DataFim
 from
 	Assinatura a inner join [DWVLT_ALV_CFB].[dbo].[USUARIO] u 
 	on a.UsuarioID = u.UsuarioID
@@ -144,10 +145,10 @@ SELECT
 	c.Trimestre,
 	c.Hora,
 	c.Minuto,
-	c.Segundo
+	c.Segundo,
+	ch.
 
 FROM 
-
 	Avaliacao a INNER JOIN  CALENDARIO c
 		ON a.CalendarioChave = c.CalendarioChave
 	INNER JOIN Usuario u
@@ -158,4 +159,6 @@ FROM
 		ON g.GeneroChave = a.GeneroChave
 	INNER JOIN PRODUTORA p
 		ON p.ProdutoraChave = a.ProdutoraChave
+	INNER JOIN CHURN ch
+		on u.UsuarioChave = ch.UsuarioChave
 	;

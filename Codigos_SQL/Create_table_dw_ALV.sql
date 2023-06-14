@@ -83,6 +83,7 @@ CREATE TABLE CHURN
 (
 	CalendarioChave uniqueidentifier NOT NULL,
 	UsuarioChave uniqueidentifier NOT NULL,
+	ChurnData DATE,
 	FOREIGN KEY(CalendarioChave) REFERENCES Calendario(CalendarioChave),
 	FOREIGN KEY(UsuarioChave) REFERENCES Usuario(UsuarioChave),
 );
