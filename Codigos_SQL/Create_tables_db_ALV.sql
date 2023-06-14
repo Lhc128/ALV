@@ -138,7 +138,7 @@ CREATE TABLE Assinatura
   AssinaturaID INT NOT NULL,
   DataInicio DATETIME NOT NULL,
   DataFim DATETIME NOT NULL,
-  Status VARCHAR(20) NOT NULL,
+  Ativo VARCHAR(20) NOT NULL,
   UsuarioID INT NOT NULL,
   PlanoID INT NOT NULL,
   PRIMARY KEY (AssinaturaID),

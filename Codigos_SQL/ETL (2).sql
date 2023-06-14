@@ -115,11 +115,11 @@ from
 	inner join [DWVLT_ALV_CFB].[dbo].[GENERO] g
 	on g.GeneroNome = po.GeneroNome
 
-INSERT INTO [DWVLT_ALV_CFB].[dbo].[CHURN] (UsuarioChave, CalendarioChave, Status)
+INSERT INTO [DWVLT_ALV_CFB].[dbo].[CHURN] (UsuarioChave, CalendarioChave, Ativo)
 select
 	u.UsuarioChave,
 	c.CalendarioChave,
-	a.Status
+	a.Ativo
 from
 	Assinatura a inner join [DWVLT_ALV_CFB].[dbo].[USUARIO] u 
 	on a.UsuarioID = u.UsuarioID
@@ -145,10 +145,10 @@ SELECT
 	c.Hora,
 	c.Minuto,
 	c.Segundo,
-	ch.Status
+	ch.Ativo
 
 FROM 
-	Avaliacao a INNER JOIN  CALENDARIO c
+	Avaliacao a INNER JOIN  [DWVLT_ALV_CFB].[dbo].[CALENDARIO] c
 		ON a.CalendarioChave = c.CalendarioChave
 	INNER JOIN Usuario u
 		ON u.UsuarioChave = a.ClienteChave

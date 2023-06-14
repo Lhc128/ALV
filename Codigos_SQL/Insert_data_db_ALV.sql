@@ -120,7 +120,7 @@ INSERT INTO Produz (FilmeID, ProdutoraID) VALUES
 (4, 1),
 (5, 3);
 
-INSERT INTO Assinatura (AssinaturaID, DataInicio, DataFim, Status, UsuarioID, PlanoID) VALUES
+INSERT INTO Assinatura (AssinaturaID, DataInicio, DataFim, Ativo, UsuarioID, PlanoID) VALUES
 (1, '2022-01-01 08:30:00', '2022-02-01 08:30:00', 'Intiva', 1, 1),
 (2, '2022-02-10 12:15:00', '2022-03-10 12:15:00', 'Inativa', 2, 2),
 (3, '2022-03-20 16:45:00', '2022-04-20 16:45:00', 'Inativa', 3, 3),
