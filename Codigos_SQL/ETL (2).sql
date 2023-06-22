@@ -115,19 +115,14 @@ from
 	inner join [DWVLT_ALV_CFB].[dbo].[GENERO] g
 	on g.GeneroNome = po.GeneroNome
 
-INSERT INTO [DWVLT_ALV_CFB].[dbo].[CHURN] (UsuarioChave, CalendarioChave, Ativo)
+INSERT INTO [DWVLT_ALV_CFB].[dbo].[CHURN] (UsuarioChave, DataFim, Ativo)
 select
 	u.UsuarioChave,
-	c.CalendarioChave,
+	a.DataFim,
 	a.Ativo
 from
-	Assinatura a inner join [DWVLT_ALV_CFB].[dbo].[USUARIO] u 
+	Assinatura a inner join [DWVLT_ALV_CFB].[dbo].[USUARIO] u
 	on a.UsuarioID = u.UsuarioID
-	inner join [DWVLT_ALV_CFB].[dbo].[CALENDARIO] c
-	on a.DataFim = c.DataCompleta
-
-use DWVLT_ALV_CFB
-go
 
 CREATE VIEW VIEW_AVALIACAO AS 
 
@@ -148,16 +143,16 @@ SELECT
 	ch.Ativo
 
 FROM 
-	Avaliacao a INNER JOIN  [DWVLT_ALV_CFB].[dbo].[CALENDARIO] c
+	[DWVLT_ALV_CFB].[dbo].[AVALIACAO] a INNER JOIN  [DWVLT_ALV_CFB].[dbo].[CALENDARIO] c
 		ON a.CalendarioChave = c.CalendarioChave
-	INNER JOIN Usuario u
+	INNER JOIN [DWVLT_ALV_CFB].[dbo].[USUARIO] u
 		ON u.UsuarioChave = a.ClienteChave
-	INNER JOIN Filme f 
+	INNER JOIN [DWVLT_ALV_CFB].[dbo].[FILME] f
 		ON f.FilmeChave = a.FilmeChave
-	INNER JOIN Genero g
+	INNER JOIN [DWVLT_ALV_CFB].[dbo].[GENERO] g
 		ON g.GeneroChave = a.GeneroChave
-	INNER JOIN PRODUTORA p
+	INNER JOIN [DWVLT_ALV_CFB].[dbo].[PRODUTORA] p
 		ON p.ProdutoraChave = a.ProdutoraChave
-	INNER JOIN CHURN ch
+	INNER JOIN [DWVLT_ALV_CFB].[dbo].[CHURN] ch
 		on u.UsuarioChave = ch.UsuarioChave
 	;

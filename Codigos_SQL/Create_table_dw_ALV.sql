@@ -81,9 +81,8 @@ CREATE TABLE AVALIACAO
 
 CREATE TABLE CHURN
 (
-	CalendarioChave uniqueidentifier NOT NULL,
 	UsuarioChave uniqueidentifier NOT NULL,
+	DataFim DATE NOT NULL,
 	Ativo VARCHAR(20) NOT NULL,
-	FOREIGN KEY(CalendarioChave) REFERENCES Calendario(CalendarioChave),
 	FOREIGN KEY(UsuarioChave) REFERENCES Usuario(UsuarioChave),
 );
